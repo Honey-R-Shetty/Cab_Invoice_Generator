@@ -62,4 +62,10 @@ public class InvoiceGeneratorTest {
 		assertEquals(expected, sum);
 	}
 
+	@Test
+	public void testPremiumRide() {
+		Ride r = new Ride(2, 5);
+		double fare = invoice.calculateFare(r, true);
+		assertEquals(40.0, fare, 0.01);
+	}
 }
