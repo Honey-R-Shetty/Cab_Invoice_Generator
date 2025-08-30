@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class InvoiceGeneratorTest {
 	InvoiceGenerator invoice = new InvoiceGenerator();
+	InvoiceService service = new InvoiceService();
 
 	@Test
 	public void testFare() {
@@ -52,4 +53,13 @@ public class InvoiceGeneratorTest {
 		InvoiceSummary expected = new InvoiceSummary(2, 30.0);
 		assertEquals(expected, actual);
 	}
+
+	@Test
+	public void testUserInvoice() {
+		service.addRides("user1", new Ride[] { new Ride(2, 5), new Ride(0.2, 1) });
+		InvoiceSummary sum = service.getInvoice("user1");
+		InvoiceSummary expected = new InvoiceSummary(2, 30.0);
+		assertEquals(expected, sum);
+	}
+
 }
