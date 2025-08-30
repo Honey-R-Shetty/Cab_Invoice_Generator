@@ -45,4 +45,11 @@ public class InvoiceGeneratorTest {
 		assertEquals(15.0, sum.getAvgFare());
 	}
 
+	@Test
+	public void testEnhancedInvoice() {
+		Ride[] rides = { new Ride(2, 5), new Ride(0.2, 1) };
+		InvoiceSummary actual = invoice.calculateInvoice(rides);
+		InvoiceSummary expected = new InvoiceSummary(2, 30.0);
+		assertEquals(expected, actual);
+	}
 }
