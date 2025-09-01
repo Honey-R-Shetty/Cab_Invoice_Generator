@@ -9,20 +9,20 @@ public class InvoiceGenerator {
 	private static final double PREMIUM_COST_PER_MIN = 2;
 	private static final double PREMIUM_MIN_FARE = 20;
 
-	public double calculateFare(double dist, int time) {
-		if (dist <= 0)
+	public double calculateFare(double distance, int time) {
+		if (distance <= 0)
 			throw new IllegalArgumentException("Distance must be positive");
-		if (time < 0)
+		if (time <= 0)
 			throw new IllegalArgumentException("Time must be positive");
 
-		double fare = dist * COST_PER_KM + time * COST_PER_MIN;
+		double fare = distance * COST_PER_KM + time * COST_PER_MIN;
 		return Math.max(fare, MIN_FARE);
 	}
 
 	public InvoiceSummary calculateInvoice(Ride[] rides) {
 		double totalFare = 0;
-		for (Ride r : rides) {
-			totalFare += calculateFare(r.distance, r.time);
+		for (Ride ride : rides) {
+			totalFare += calculateFare(ride.distance, ride.time);
 		}
 		return new InvoiceSummary(rides.length, totalFare);
 	}

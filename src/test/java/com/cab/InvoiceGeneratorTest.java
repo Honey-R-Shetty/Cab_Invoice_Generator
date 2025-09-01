@@ -23,6 +23,7 @@ public class InvoiceGeneratorTest {
 	public void testZeroDistance() {
 		try {
 			invoice.calculateFare(0, 5);
+			fail("Expected IllegalArgumentException not thrown"); 
 		} catch (IllegalArgumentException e) {
 			assertEquals("Distance must be positive", e.getMessage());
 		}
@@ -31,7 +32,8 @@ public class InvoiceGeneratorTest {
 	@Test
 	public void testNegativeMinutes() {
 		try {
-			invoice.calculateFare(5, -4);
+			invoice.calculateFare(5, 0);
+			fail("Expected IllegalArgumentException not thrown"); 
 		} catch (IllegalArgumentException e) {
 			assertEquals("Time must be positive", e.getMessage());
 		}
@@ -64,8 +66,8 @@ public class InvoiceGeneratorTest {
 
 	@Test
 	public void testPremiumRide() {
-		Ride r = new Ride(2, 5);
-		double fare = invoice.calculateFare(r, true);
+		Ride ride = new Ride(2, 5);
+		double fare = invoice.calculateFare(ride, true);
 		assertEquals(40.0, fare, 0.01);
 	}
 }
